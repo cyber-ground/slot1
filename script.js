@@ -541,8 +541,7 @@ function pointAdd_matchedAll() {
   else if(panels[2].img.src.includes('watermelon')) {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200);
     releaseConfetti(30, 150); cheerShortHowl.play(); 
-    // loadData(3000);
-    getFetchData('watermelon', 65, 50, -100, 3000); //*** Cheer */  
+    loadData(3000);
     pointRate(500); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 1800);
   } 
