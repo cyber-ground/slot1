@@ -1269,6 +1269,7 @@ const spinBtn = document.getElementById('spin');
 
 const mp4s = ['img/Seoul.mp4', 'img/City.mp4'];
   const video = document.querySelector('.video');
+  video.src = 'img/City.mp4';
   window.addEventListener('resize', () => {
     video.src = mp4s[Math.floor(Math.random() * mp4s.length)];
   });
@@ -1284,11 +1285,12 @@ const mp4s = ['img/Seoul.mp4', 'img/City.mp4'];
     const squareOne = document.createElement('span');
     const squareTwo = document.createElement('span');
     const squareRange = document.createElement('div');
-    squareOne.classList.add('squareOne', 'square');
-    squareTwo.classList.add('squareTwo', 'square');
+    squareOne.classList.add('squareOne');
+    squareTwo.classList.add('squareTwo');
     squareOne.style.setProperty('--bgc',
       squareOneClr[Math.floor(Math.random() * squareOneClr.length)]);
     squareRange.classList.add('squareRange');
+    document.documentElement.style.setProperty('--top', innerHeight + 'px');
     squareRange.appendChild(squareOne);
     squareRange.appendChild(squareTwo);
     document.body.appendChild(squareRange);
@@ -1298,7 +1300,6 @@ const mp4s = ['img/Seoul.mp4', 'img/City.mp4'];
       rectangle.style.width = 7 + Math.random() * 10 + 'px';
       rectangle.style.left = Math.random() * innerWidth + 'px';
       rectangle.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
-      rectangle.style.setProperty('--top', innerHeight + 'px');
       rectangle.style.setProperty('--skew', 15 + Math.random() * 20 +'deg');
       rectangle.style.setProperty('--tx', (Math.random() - 0.5) * 100 + 'px');
       rectangle.style.setProperty('--x', (Math.random() - 0.5) * 360 + 'deg');
@@ -1321,7 +1322,7 @@ const mp4s = ['img/Seoul.mp4', 'img/City.mp4'];
         if(rectangles.length < 10) { confetti = false }
       });
     });
-  } console.clear(); //* log
+  } console.clear(); //* log clear
 
 
 //* Fetch Dancing Version -------------------------------------------------------
