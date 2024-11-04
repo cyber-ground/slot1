@@ -1154,8 +1154,8 @@ function betAmount(arg) {
       assignTextAndColor(winText, 'WON', '#ff0');
       assignTextAndColor(winPoint, 'BIG', '#00ff00e6');
       assignTextAndColor(betPoint, 'END', '#0af');
-      betPoint.style.fontSize = '1em';
-      betPoint.style.marginTop = 7 + 'px'
+      betPoint.style.fontSize = 1 + 'em';
+      betPoint.style.marginTop = 7 + 'px';
       if(currentDept === 0) {
         applyCheckOut = true;
         checkOutDept = true;
