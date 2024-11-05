@@ -1295,7 +1295,7 @@ const checkOut = document.querySelector('.check-out');
       saveData() //***
       madeMillionaire();
       checkOutNoticeHowl.stop();
-      checkOut.classList.add('notification');
+      checkOut.classList.remove('notification');
     } else if(currentDept > total) { 
         deactivateBgmHowl(); //*
           outFailureHowl.play(); 
