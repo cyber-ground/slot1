@@ -1151,20 +1151,18 @@ function betAmount(arg) {
     if(total > 99999999) {
       assignTextAndColor(totalPoint, 'millionaire', '#ff0');
       totalPoint.style.marginLeft = -1.5 + 'px';
-      assignTextAndColor(winText, 'WON', '#ff0');
-      assignTextAndColor(winPoint, 'BIG', '#00ff00e6');
-      assignTextAndColor(betPoint, 'END', '#0af');
-      betPoint.style.fontSize = 1 + 'em';
-      betPoint.style.marginTop = 7 + 'px';
+      setClosureText(); checkOutNoticeHowl.stop();
+      checkOut.classList.remove('notification');
       if(currentDept === 0) {
-        applyCheckOut = true;
-        checkOutDept = true;
+        [applyCheckOut, checkOutDept] = [true, true];
         checkOut.classList.add('js_checkOut-win');
         checkOut.textContent = `WIN + ${total - currentDept}`;
         deactivateBgmHowl(); winHowl.volume(0); 
         if(localStorage.hasOwnProperty('millionaire')) return;
         clearTimeout(tid_BigSpin); clearTimeout(tid_freeSpin); 
         localStorage.setItem('millionaire', true);
+        localStorage.setItem('closure', true);
+        setClosureText();
         if(panels[2].matched(panels[1], panels[0])) {  
           if(panels[2].img.src.includes('pumpkin')) {
             victoryConfettiOne(1500);
@@ -1182,8 +1180,12 @@ function betAmount(arg) {
         setTimeout(() => {
           checkOutNoticeHowl.play();
           checkOut.classList.add('notification');
+          localStorage.setItem('closure', true);
         }, 3000);
       }
+    } else { 
+      assignTextAndColor(totalPoint, total, '#fff');
+      totalPoint.style.marginLeft = '';
     }
   }
 
@@ -1203,6 +1205,15 @@ function betAmount(arg) {
     }, duration);
   }
 
+  function setClosureText() {
+    if(localStorage.hasOwnProperty('closure')) {
+      assignTextAndColor(winText, 'WON', '#ff0');
+      assignTextAndColor(winPoint, 'BIG', '#00ff00e6');
+      assignTextAndColor(betPoint, 'END', '#0af');
+      betPoint.style.fontSize = 1 + 'em';
+      betPoint.style.marginTop = 7 + 'px';
+    }
+  } 
 
   //* insertPoint Event -------------------
 
@@ -1294,8 +1305,8 @@ const checkOut = document.querySelector('.check-out');
       winPointSetDefault(); //*
       saveData() //***
       madeMillionaire();
-      checkOutNoticeHowl.stop();
-      checkOut.classList.remove('notification');
+      // checkOutNoticeHowl.stop();
+      // checkOut.classList.remove('notification');
     } else if(currentDept > total) { 
         deactivateBgmHowl(); //*
           outFailureHowl.play(); 
