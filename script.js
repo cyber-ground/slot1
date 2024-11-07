@@ -937,8 +937,7 @@ function coinTwoPairHowlMix() {
 
 function pointRate(arg) { 
   winRed_add_bigSpinRed_remove(); //*
-  if(bet5x.classList.contains('js_bet5x-activeEffect') 
-  && bet2x.classList.contains('js_bet2x-activeEffect')) {
+  if(parseInt(betPoint.textContent) === 500) {
     if(insertPoint.classList.contains('js_blank') && !freeSpin) { //* X POINT 
       // console.log('contain read in checkBetAmount 5x2x');
       total += arg * 100; 
@@ -953,7 +952,7 @@ function pointRate(arg) {
         // console.log(' read in pointRate 5x2x');
       return;
     }
-  } else if(bet5x.classList.contains('js_bet5x-activeEffect')) {
+  } else if(parseInt(betPoint.textContent) === 250) {
     if(insertPoint.classList.contains('js_blank') && !freeSpin) { //* X POINT 
       // console.log('contain read in checkBetAmount 5x');
       total += arg * 50;
@@ -969,7 +968,7 @@ function pointRate(arg) {
       return;
     }
   }
-  if(bet2x.classList.contains('js_bet2x-activeEffect')) {
+  if(parseInt(betPoint.textContent) === 100) {
     if(insertPoint.classList.contains('js_blank') && !freeSpin) { //* X POINT 
       // console.log('contain read in checkBetAmount 2x');
       total += arg * 20;
@@ -1056,7 +1055,7 @@ function betCounter() {
 function betAmount(arg) {
   betPoint.textContent ='';
   setTimeout(() => {
-      betPoint.textContent = arg;
+    betPoint.textContent = arg;
   }, 50);
 }
 
