@@ -78,7 +78,7 @@ class Panel {
           spinBtn.classList.remove('js_inActive'); // reset btn opacity 
           spinBtn.classList.remove('js_spinBtnAnimation'); // reset trf animation  
           bigSpinX.classList.remove('activate'); // reset bigSpinX activate //*
-          madeMillionaire(); //*>
+          isClosure(); //*>
         if(total === 0) {  // rewrite default message 
           spinBtn.textContent = 'INSERT MONEY TO PLAY';
             betPoint.textContent = 0;
@@ -1122,7 +1122,7 @@ function betAmount(arg) {
 
 //* Game Over Func -------------------
 
-  function gameOver() {
+  function isGameOver() {
     if(currentDept > 99999999) {
       [checkOutDept, applyCheckOut] = [true, true];
       clearTimeout(tid_gameStartHowl);
@@ -1135,9 +1135,9 @@ function betAmount(arg) {
       assignTextAndColor(totalPoint, 'ARE', '#f00');
       assignTextAndColor(betPoint,'DONE', '#f00');
       assignTextAndColor(deptPoint, 'MILLION', '#0af');
-      if(localStorage.hasOwnProperty('playsOver')) return;
+      if(localStorage.hasOwnProperty('gameOver')) return;
       outFailureHowl.play(); insertHowl.stop();
-      localStorage.setItem('playsOver', true);
+      localStorage.setItem('gameOver', true);
     }
   }
 
@@ -1145,8 +1145,8 @@ function betAmount(arg) {
     elem.textContent = txt;
     elem.style.color = clr;
   }
-
-  function madeMillionaire() {
+  
+  function isClosure() {
     if(total > 99999999) {
       assignTextAndColor(totalPoint, 'millionaire', '#ff0');
       totalPoint.style.marginLeft = -1.5 + 'px';
@@ -1161,6 +1161,7 @@ function betAmount(arg) {
         clearTimeout(tid_BigSpin); clearTimeout(tid_freeSpin); 
         localStorage.setItem('millionaire', true);
         localStorage.setItem('closure', true);
+        // winPoint.classList.remove('js_winRed');
         setClosureText();
         if(panels[2].matched(panels[1], panels[0])) {  
           if(panels[2].img.src.includes('pumpkin')) {
@@ -1233,7 +1234,7 @@ function betAmount(arg) {
     betPoint.textContent = 0;
     totalPoint.textContent = total; 
     deptPoint.textContent = currentDept; 
-     gameOver(); //*>
+      isGameOver(); //*>
       spinBtn.textContent = 'SPIN'; // rewrite textContent to SPIN 
         checkOut.textContent = 'CHECK OUT'; 
           checkOut.classList.remove('js_checkOut-lost');
@@ -1303,7 +1304,7 @@ const checkOut = document.querySelector('.check-out');
       deptPoint.textContent = currentDept;
       winPointSetDefault(); //*
       saveData() //***
-      madeMillionaire();
+      isClosure();
       // checkOutNoticeHowl.stop();
       // checkOut.classList.remove('notification');
     } else if(currentDept > total) { 
@@ -1585,8 +1586,8 @@ const loader = document.querySelector('.loader');
 const iid_load = setInterval(() => {
   if(total > 0) { insertPoint.classList.add('active')} //*
   if(total > 0 || currentDept > 0) { checkOut.classList.add('active')} //*
-  if(localStorage.hasOwnProperty('playsOver')) { gameOver() }
-  if(localStorage.hasOwnProperty('millionaire')) { madeMillionaire() }
+  if(localStorage.hasOwnProperty('gameOver')) { isGameOver() }
+  if(localStorage.hasOwnProperty('closure')) { isClosure() }
   if(loadCount === 4) {
     loader.querySelectorAll('img').forEach(img => {
       img.classList.remove('active');
