@@ -97,10 +97,8 @@ class Panel {
   } //* OUT OF Constructor 
 
   getRandomImg() {
-    const images = [
-      'img/bar.jpg','img/diamond.jpg','img/diamond.jpg','img/diamond.jpg'];
-    // const images = ['img/bell.jpg','img/cherry.jpg','img/watermelon.jpg','img/diamond.jpg',
-    //   'img/bar.jpg','img/seven.jpg','img/dollar.jpg','img/pumpkin.jpg','img/blueSeven.jpg'];
+    const images = ['img/bell.jpg','img/cherry.jpg','img/watermelon.jpg','img/diamond.jpg',
+      'img/bar.jpg','img/seven.jpg','img/dollar.jpg','img/pumpkin.jpg','img/blueSeven.jpg'];
     return images[Math.floor(Math.random() * images.length)];
   }
   
