@@ -514,14 +514,14 @@ function pointAdd_matchedAll() {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200); 
     cheerHowl.play(); releaseConfetti(300, 1); 
     loadData(5000); 
-    pointRate(20000); pointsAdded = true;
+    pointRate(5000); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 3000); 
   } 
   else if(panels[2].img.src.includes('blueSeven')) {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200); 
     cheerHowl.play(); releaseConfetti(200, 1); 
     loadData(3500); 
-    pointRate(15000); pointsAdded = true;
+    pointRate(4000); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 2500);
   } 
   else if(panels[2].img.src.includes('diamond')) { //* BIG SPIN 
@@ -532,7 +532,7 @@ function pointAdd_matchedAll() {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200);
     cheerHowl.play(); releaseConfetti(75, 150); 
     loadData(3500); 
-    pointRate(5000); pointsAdded = true;
+    pointRate(2000); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 2000);
   } 
   else if(panels[2].img.src.includes('pumpkin')) { //* FREE SPIN
@@ -672,7 +672,7 @@ function pointAdd_twoPairExtraSeven() {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200); 
     cheerHowl.play(); releaseConfetti(200, 1);
     loadData(3800);
-    pointRate(5000); pointsAdded = true; 
+    pointRate(3000); pointsAdded = true; 
     setTimeout(() => { winHowl.play() }, 2000);
   }
   //* redSeven Center & Two Pair
@@ -717,7 +717,7 @@ function pointAdd_twoPairExtraSeven() {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200);
     cheerHowl.play(); releaseConfetti(200, 1);
     loadData(3800);
-    pointRate(4000); pointsAdded = true; 
+    pointRate(2500); pointsAdded = true; 
     setTimeout(() => { winHowl.play() }, 2000);
   }
     //* blueSeven Center & Two Pair
@@ -771,7 +771,7 @@ function pointAdd_extraThreeSeven() {
         setTimeout(() => { coinTwoPairExtraHowl.play() }, 200);
         cheerHowl.play(); releaseConfetti(150, 100); 
           loadData(3800);
-        pointRate(3000); pointsAdded = true;
+        pointRate(2000); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 2000);
   }
   //* Three Seven // One redSeven
@@ -784,7 +784,7 @@ function pointAdd_extraThreeSeven() {
         setTimeout(() => { coinTwoPairExtraHowl.play() }, 200);
         cheerHowl.play(); releaseConfetti(150, 100); 
           loadData(3800);
-      pointRate(2500); pointsAdded = true;
+      pointRate(1500); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 2000);
   }
 }
