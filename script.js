@@ -514,7 +514,7 @@ function pointAdd_matchedAll() {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200); 
     cheerHowl.play(); releaseConfetti(300, 1); 
     loadData(5000); 
-    pointRate(200000); pointsAdded = true;
+    pointRate(20000); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 3000); 
   } 
   else if(panels[2].img.src.includes('blueSeven')) {
@@ -1222,6 +1222,7 @@ function betAmount(arg) {
   insertPoint.addEventListener('click', () => {
     if(total > 0 || tryAgainSound) return;
     [insertMoney, checkOutLock] = [true, true];
+    clearTimeout(tid_checkOut);
     checkOutDept = false; 
     total += 10000; //*** 
     currentDept += 10000; //***
@@ -1240,7 +1241,7 @@ function betAmount(arg) {
           checkOut.classList.remove('js_checkOut-lost');
         insertPoint.classList.add('js_insertPoint-activeEffect'); // insert btn flash effect 
       insertPoint.classList.add('js_insertPoint-textColorBright');
-    checkOut.classList.add('active'); //*
+    checkOut.classList.add('active'); //* 
     setTimeout(() => { 
         insertPoint.classList.remove('js_insertPoint-activeEffect');
       insertPoint.classList.remove('js_insertPoint-textColorBright');
@@ -1286,11 +1287,12 @@ const bet5x = document.querySelector('.btn-bet5x');
 
 //* checkOut Event -------------------
 
+let tid_checkOut;
 const checkOut = document.querySelector('.check-out');
   checkOut.addEventListener('click', function () {
     if(!checkOutLock || applyCheckOut) return;
     if(gameStartSound || tryAgainSound) return;
-    if(currentDept === 0) return; 
+    if(total === 0 && currentDept === 0) return;
     betPoint.textContent = 0;
     reset2x_activeEffect(); reset5x_activeEffect();
     checkOutLock = false;
@@ -1305,7 +1307,6 @@ const checkOut = document.querySelector('.check-out');
       winPointSetDefault(); //*
       saveData() //***
       isClosure();
-      checkOut.classList.remove('active'); //*
     } else if(currentDept > total) { 
         deactivateBgmHowl(); //*
           outFailureHowl.play(); 
@@ -1327,7 +1328,7 @@ const checkOut = document.querySelector('.check-out');
           spinBtn.textContent = 'INSERT MONEY TO PLAY'; 
           deactivateBgmHowl(); //*
           winPointSetDefault(); //*
-          setTimeout(() => { checkOut.classList.remove('active')}, 3000);
+          tid_checkOut = setTimeout(() => { checkOut.classList.remove('active')}, 3000);
         }
       } 
     }
@@ -1584,7 +1585,7 @@ function loadImages() {
 const loader = document.querySelector('.loader');
 const iid_load = setInterval(() => {
   if(total > 0) { insertPoint.classList.add('active')} //*
-  if(currentDept > 0) { checkOut.classList.add('active')} //*
+  if(total > 0 || currentDept > 0) { checkOut.classList.add('active')} //*
   if(localStorage.hasOwnProperty('gameOver')) { isGameOver() }
   if(localStorage.hasOwnProperty('closure')) { isClosure() }
   if(loadCount === 4) {
