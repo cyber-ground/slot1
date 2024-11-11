@@ -514,7 +514,7 @@ function pointAdd_matchedAll() {
     setTimeout(() => { coinTwoPairExtraHowl.play() }, 200); 
     cheerHowl.play(); releaseConfetti(300, 1); 
     loadData(5000); 
-    pointRate(20000); pointsAdded = true;
+    pointRate(200000); pointsAdded = true;
     setTimeout(() => { winHowl.play() }, 3000); 
   } 
   else if(panels[2].img.src.includes('blueSeven')) {
@@ -1290,7 +1290,7 @@ const checkOut = document.querySelector('.check-out');
   checkOut.addEventListener('click', function () {
     if(!checkOutLock || applyCheckOut) return;
     if(gameStartSound || tryAgainSound) return;
-    if(total === 0 && currentDept === 0) return;
+    if(currentDept === 0) return; 
     betPoint.textContent = 0;
     reset2x_activeEffect(); reset5x_activeEffect();
     checkOutLock = false;
@@ -1305,8 +1305,7 @@ const checkOut = document.querySelector('.check-out');
       winPointSetDefault(); //*
       saveData() //***
       isClosure();
-      // checkOutNoticeHowl.stop();
-      // checkOut.classList.remove('notification');
+      checkOut.classList.remove('active'); //*
     } else if(currentDept > total) { 
         deactivateBgmHowl(); //*
           outFailureHowl.play(); 
@@ -1585,7 +1584,7 @@ function loadImages() {
 const loader = document.querySelector('.loader');
 const iid_load = setInterval(() => {
   if(total > 0) { insertPoint.classList.add('active')} //*
-  if(total > 0 || currentDept > 0) { checkOut.classList.add('active')} //*
+  if(currentDept > 0) { checkOut.classList.add('active')} //*
   if(localStorage.hasOwnProperty('gameOver')) { isGameOver() }
   if(localStorage.hasOwnProperty('closure')) { isClosure() }
   if(loadCount === 4) {
