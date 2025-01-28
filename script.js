@@ -12,12 +12,12 @@ import {console_color,console_red,console_orange,console_yellow,console_green,
 
 let reelCount = 1;
   let total = 0;
-    let currentDept = 0;
+    let currentDebt = 0;
       let panelsRemain = 3;
       let spinStopBtnEvent = false;
     let activeLight = false;
   let applyCheckOut = false;
-    let checkOutDept = false; 
+    let checkOutDebt = false; 
       let checkOutLock = false;  
         let bigSpin = false;
         let bigSpinFlash = false;
@@ -87,8 +87,8 @@ class Panel {
             insertMoney = false; //*
           insertPoint.classList.remove('active');
         }
-        if(currentDept === 0 && total <= 0)  { 
-          checkOutDept = true; // game over
+        if(currentDebt === 0 && total <= 0)  { 
+          checkOutDebt = true; // game over
           checkOutLock = false;
           checkOut.classList.remove('active');
         }
@@ -482,28 +482,28 @@ function checkForTwoPairExtraPumpkin() {
     const winPoint = document.querySelector('.win-point');
       const totalPoint = document.querySelector('.total-point');
         const betPoint = document.querySelector('.bet-point');
-        const deptPoint = document.querySelector('.dept-point');
+        const debtPoint = document.querySelector('.debt-point');
       const winText = document.querySelector('.win-text');
     const totalText = document.querySelector('.total-text');
       const betText = document.querySelector('.bet-text');
         winPoint.textContent = 0;
       totalPoint.textContent = 0;
     betPoint.textContent = 0;
-  deptPoint.textContent = 0;
+    debtPoint.textContent = 0;
 
 //* save data to local storage ------------------------------------
 
 function saveData() { 
   localStorage.setItem('total', total);
-  localStorage.setItem('currentDept', currentDept);
+  localStorage.setItem('currentDebt', currentDebt);
   adjustPointsFontSize();
 } 
 
 function getData() { 
   totalPoint.textContent = parseFloat(localStorage.getItem('total'));
-  deptPoint.textContent = parseFloat(localStorage.getItem('currentDept'));
+  debtPoint.textContent = parseFloat(localStorage.getItem('currentDebt'));
   total = parseFloat(localStorage.getItem('total'));
-  currentDept = parseFloat(localStorage.getItem('currentDept'));
+  currentDebt = parseFloat(localStorage.getItem('currentDebt'));
   adjustPointsFontSize();
 } 
 if(localStorage.getItem('total')) { getData(); checkOutLock = true } //***
@@ -1089,10 +1089,10 @@ function betAmount(arg) {
       if(total > 9999999) { totalPoint.style.fontSize = 0.9 + 'em'} 
       else if(total > 999999) { totalPoint.style.fontSize = 1 + 'em'} 
       else { totalPoint.style.fontSize = 1.2 + 'em'}
-      //* deptPoint ---
-      if(currentDept > 9999999) { deptPoint.style.fontSize = 0.9 + 'em'} 
-      else if(currentDept > 999999) { deptPoint.style.fontSize = 1 + 'em'} 
-      else { deptPoint.style.fontSize = 1.2 + 'em'}
+      //* debtPoint ---
+      if(currentDebt > 9999999) { debtPoint.style.fontSize = 0.9 + 'em'} 
+      else if(currentDebt > 999999) { debtPoint.style.fontSize = 1 + 'em'} 
+      else { debtPoint.style.fontSize = 1.2 + 'em'}
       //* winPoint ---
       if(winPoint.textContent > 999999) { winPoint.style.fontSize = 1 + 'em'} 
       else { winPoint.style.fontSize = ''}
@@ -1101,10 +1101,10 @@ function betAmount(arg) {
       if(total > 9999999) { totalPoint.style.fontSize = 0.6 + 'em'} 
       else if(total > 999999) { totalPoint.style.fontSize = 0.7 + 'em'} 
       else { totalPoint.style.fontSize = 0.9 + 'em'}
-      //* deptPoint ---
-      if(currentDept > 9999999) { deptPoint.style.fontSize = 0.6 + 'em'} 
-      else if(currentDept > 999999) { deptPoint.style.fontSize = 0.7 + 'em'} 
-      else { deptPoint.style.fontSize = 0.9 + 'em'}
+      //* debtPoint ---
+      if(currentDebt > 9999999) { debtPoint.style.fontSize = 0.6 + 'em'} 
+      else if(currentDebt > 999999) { debtPoint.style.fontSize = 0.7 + 'em'} 
+      else { debtPoint.style.fontSize = 0.9 + 'em'}
       //* winPoint ---
       if(winPoint.textContent > 999999) { winPoint.style.fontSize = 1 + 'em'} 
       else { winPoint.style.fontSize = ''}
@@ -1113,10 +1113,10 @@ function betAmount(arg) {
       if(total > 9999999) { totalPoint.style.fontSize = 0.7 + 'em'} 
       else if(total > 999999) { totalPoint.style.fontSize = 0.8 + 'em'} 
       else { totalPoint.style.fontSize = 1 + 'em'}
-      //* deptPoint ---
-      if(currentDept > 9999999) { deptPoint.style.fontSize = 0.7 + 'em'} 
-      else if(currentDept > 999999) { deptPoint.style.fontSize = 0.8 + 'em'} 
-      else { deptPoint.style.fontSize = 1 + 'em';}
+      //* debtPoint ---
+      if(currentDebt > 9999999) { debtPoint.style.fontSize = 0.7 + 'em'} 
+      else if(currentDebt > 999999) { debtPoint.style.fontSize = 0.8 + 'em'} 
+      else { debtPoint.style.fontSize = 1 + 'em';}
       //* winPoint ---
       if(winPoint.textContent > 999999) { winPoint.style.fontSize = 1 + 'em'} 
       else { winPoint.style.fontSize = ''}
@@ -1126,8 +1126,8 @@ function betAmount(arg) {
 //* Game Over Func -------------------
 
   function isGameOver() {
-    if(currentDept > 99999999) {
-      [checkOutDept, applyCheckOut] = [true, true];
+    if(currentDebt > 99999999) {
+      [checkOutDebt, applyCheckOut] = [true, true];
       clearTimeout(tid_gameStartHowl);
       checkOut.classList.add('js_checkOut-lost');
       checkOut.textContent = `LOST ENOUGH`;
@@ -1137,7 +1137,7 @@ function betAmount(arg) {
       assignTextAndColor(winPoint, 'YOU', '#f00');
       assignTextAndColor(totalPoint, 'ARE', '#f00');
       assignTextAndColor(betPoint,'DONE', '#f00');
-      assignTextAndColor(deptPoint, 'MILLION', '#0af');
+      assignTextAndColor(debtPoint, 'MILLION', '#0af');
       if(localStorage.hasOwnProperty('gameOver')) return;
       outFailureHowl.play(); insertHowl.stop();
       localStorage.setItem('gameOver', true);
@@ -1155,10 +1155,10 @@ function betAmount(arg) {
       totalPoint.style.marginLeft = -1.5 + 'px';
       setClosureText(); checkOutNoticeHowl.stop();
       checkOut.classList.remove('notification');
-      if(currentDept === 0) {
-        [applyCheckOut, checkOutDept] = [true, true];
+      if(currentDebt === 0) {
+        [applyCheckOut, checkOutDebt] = [true, true];
         checkOut.classList.add('js_checkOut-win');
-        checkOut.textContent = `WIN + ${total - currentDept}`;
+        checkOut.textContent = `WIN + ${total - currentDebt}`;
         deactivateBgmHowl(); winHowl.volume(0); 
         if(localStorage.hasOwnProperty('millionaire')) return;
         clearTimeout(tid_BigSpin); clearTimeout(tid_freeSpin); 
@@ -1176,10 +1176,10 @@ function betAmount(arg) {
             victoryConfettiTwo(3500);
           } else { cheerHowl.play(); victoryConfettiTwo(2000)} // else matched
         } else { cheerHowl.play(); victoryConfettiOne(1500)} // twoPair
-      } else if(currentDept > 0 && (total - currentDept) > 99999999) {
+      } else if(currentDebt > 0 && (total - currentDebt) > 99999999) {
         clearTimeout(tid_BigSpin); clearTimeout(tid_freeSpin); 
         releaseConfetti(300, 100); cheerHowl.play(); // Millionaire
-        checkOutDept = true; gameStartSound = false;
+        checkOutDebt = true; gameStartSound = false;
         setTimeout(() => {
           checkOutNoticeHowl.play();
           checkOut.classList.add('notification');
@@ -1226,9 +1226,9 @@ function betAmount(arg) {
     if(total > 0 || tryAgainSound) return;
     [insertMoney, checkOutLock] = [true, true];
     clearTimeout(tid_checkOut);
-    checkOutDept = false; 
+    checkOutDebt = false; 
     total += 10000; //*** 
-    currentDept += 10000; //***
+    currentDebt += 10000; //***
     insertHowl.play(); 
     saveData(); //*** 
     tid_gameStartHowl = setTimeout(() => gameStartHowl.play(), 600); 
@@ -1237,7 +1237,7 @@ function betAmount(arg) {
     winPoint.textContent = 0;
     betPoint.textContent = 0;
     totalPoint.textContent = total; 
-    deptPoint.textContent = currentDept; 
+    debtPoint.textContent = currentDebt; 
       isGameOver(); //*>
       spinBtn.textContent = 'SPIN'; // rewrite textContent to SPIN 
         checkOut.textContent = 'CHECK OUT'; 
@@ -1250,7 +1250,7 @@ function betAmount(arg) {
       insertPoint.classList.remove('js_insertPoint-textColorBright');
       insertPoint.classList.add('active');
     }, 300);
-    if(currentDept > 99999999) {
+    if(currentDebt > 99999999) {
       checkOut.classList.add('js_checkOut-lost');
       checkOut.textContent = `LOST ENOUGH`;
     }
@@ -1261,7 +1261,7 @@ function betAmount(arg) {
 
 const bet2x = document.querySelector('.btn-bet2x'); 
   bet2x.addEventListener('click', function () {
-    if(bigSpin || betXSound || checkOutDept || !insertMoney && total <= 0) return;
+    if(bigSpin || betXSound || checkOutDebt || !insertMoney && total <= 0) return;
       checkOutLock = true;
     if(total < 500 && bet5x.classList.contains('js_bet5x-activeEffect') || total < 100) return; 
       checkOut.textContent = 'CHECK OUT';  // reset check out text 
@@ -1275,7 +1275,7 @@ const bet2x = document.querySelector('.btn-bet2x');
 
 const bet5x = document.querySelector('.btn-bet5x');
   bet5x.addEventListener('click', function () {
-    if(bigSpin || betXSound || checkOutDept || !insertMoney && total <= 0) return;
+    if(bigSpin || betXSound || checkOutDebt || !insertMoney && total <= 0) return;
       checkOutLock = true;
     // disable click // activeEffect disable click 
     if(total < 500 && bet2x.classList.contains('js_bet2x-activeEffect') || total < 250) return;   
@@ -1295,36 +1295,36 @@ const checkOut = document.querySelector('.check-out');
   checkOut.addEventListener('click', function () {
     if(!checkOutLock || applyCheckOut) return;
     if(gameStartSound || tryAgainSound) return;
-    if(total === 0 && currentDept === 0) return;
+    if(total === 0 && currentDebt === 0) return;
     betPoint.textContent = 0;
     reset2x_activeEffect(); reset5x_activeEffect();
     checkOutLock = false;
-    if(total > currentDept) {
+    if(total > currentDebt) {
       outSuccessHowl.play(); 
       checkOut.classList.add('js_checkOut-win');
-      checkOut.textContent = `WIN + ${total - currentDept}`;
-      totalPoint.textContent = total - currentDept;
-      total = total - currentDept;
-      currentDept = 0;
-      deptPoint.textContent = currentDept;
+      checkOut.textContent = `WIN + ${total - currentDebt}`;
+      totalPoint.textContent = total - currentDebt;
+      total = total - currentDebt;
+      currentDebt = 0;
+      debtPoint.textContent = currentDebt;
       winPointSetDefault(); //*
       saveData() //***
       isClosure();
-    } else if(currentDept > total) { 
+    } else if(currentDebt > total) { 
         deactivateBgmHowl(); //*
           outFailureHowl.play(); 
         checkOut.classList.add('js_checkOut-lost');
-      checkOut.textContent = `LOST - ${currentDept - total}`;
+      checkOut.textContent = `LOST - ${currentDebt - total}`;
     }
     else {
-      if(!checkOutDept) { // runs only total even currentDept
+      if(!checkOutDebt) { // runs only total even currentDebt
         outSuccessHowl.play();
-        deptPoint.textContent = total - currentDept;
-          totalPoint.textContent = total - currentDept;
-            [total, currentDept] = [0,0];
-              [checkOutDept, insertMoney] = [true, false];
+        debtPoint.textContent = total - currentDebt;
+          totalPoint.textContent = total - currentDebt;
+            [total, currentDebt] = [0,0];
+              [checkOutDebt, insertMoney] = [true, false];
             saveData() //***
-          checkOut.textContent = `LOST - ${currentDept - total}`;
+          checkOut.textContent = `LOST - ${currentDebt - total}`;
           setTimeout(() => { checkOut.textContent = 'CHECK OUT' }, 3000);
         if(total === 0) { 
           insertPoint.classList.remove('active');
@@ -1350,7 +1350,7 @@ const spinBtn = document.getElementById('spin');
 
   spinBtn.addEventListener('click', () => { 
     if(gameStartSound || confetti || embedFrame) return;
-    if(bigSpin || checkOutDept || total === 0) return;
+    if(bigSpin || checkOutDebt || total === 0) return;
     bigSpinFlash = false;
       winPointSetDefault(); //*
         checkOut.textContent = 'CHECK OUT';  // reset // check out text 
@@ -1589,7 +1589,7 @@ function loadImages() {
 const loader = document.querySelector('.loader');
 const iid_load = setInterval(() => {
   if(total > 0) { insertPoint.classList.add('active')} //*
-  if(total > 0 || currentDept > 0) { checkOut.classList.add('active')} //*
+  if(total > 0 || currentDebt > 0) { checkOut.classList.add('active')} //*
   if(localStorage.hasOwnProperty('gameOver')) { isGameOver() }
   if(localStorage.hasOwnProperty('closure')) { isClosure() }
   if(loadCount === 4) {
