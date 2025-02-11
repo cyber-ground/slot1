@@ -9,10 +9,9 @@ import {console_color,console_red,console_orange,console_yellow,console_green,
 //	['.9','.8','.7','.6','.5','.4','.3','.2','.1']
     ['e6','cc','b3','99','80','66','4d','33','1a']
 
-
 const unit = document.querySelector('.unit');
   unit.addEventListener('touchstart', e => e.preventDefault());
-  
+
 let reelCount = 1;
   let total = 0;
     let currentDebt = 0;
@@ -351,7 +350,7 @@ function deactivateBgmHowl() { bgmHowl.stop(); bgmHowlId = ''; }
   window.addEventListener('click', (evt) => { 
     evt.preventDefault();
   }, {passive: false});
-  console.log(base64Str); //* log
+  console.log(base64Str); //* log !important 
 
   window.addEventListener('touchmove', (e) => {
     if(innerHeight <= 667 && innerWidth >= 375) {
@@ -523,19 +522,19 @@ function checkForTwoPairExtraPumpkin() {
 //* save data to local storage ------------------------------------
 
 function saveData() { 
-  localStorage.setItem('total', total);
-  localStorage.setItem('currentDebt', currentDebt);
+  sessionStorage.setItem('total', total);
+  sessionStorage.setItem('currentDebt', currentDebt);
   adjustPointsFontSize();
 } 
 
 function getData() { 
-  totalPoint.textContent = parseFloat(localStorage.getItem('total'));
-  debtPoint.textContent = parseFloat(localStorage.getItem('currentDebt'));
-  total = parseFloat(localStorage.getItem('total'));
-  currentDebt = parseFloat(localStorage.getItem('currentDebt'));
+  totalPoint.textContent = parseFloat(sessionStorage.getItem('total'));
+  debtPoint.textContent = parseFloat(sessionStorage.getItem('currentDebt'));
+  total = parseFloat(sessionStorage.getItem('total'));
+  currentDebt = parseFloat(sessionStorage.getItem('currentDebt'));
   adjustPointsFontSize();
 } 
-if(localStorage.getItem('total')) { getData(); checkOutLock = true } //***
+if(sessionStorage.getItem('total')) { getData(); checkOutLock = true } //***
 
 //^ pointAdd // Matched All -----------------------------------------------------
 
@@ -1167,9 +1166,9 @@ function betAmount(arg) {
       assignTextAndColor(totalPoint, 'ARE', '#f00');
       assignTextAndColor(betPoint,'DONE', '#f00');
       assignTextAndColor(debtPoint, 'MILLION', '#0af');
-      if(localStorage.hasOwnProperty('gameOver')) return;
+      if(sessionStorage.hasOwnProperty('gameOver')) return;
       outFailureHowl.play(); insertHowl.stop();
-      localStorage.setItem('gameOver', true);
+      sessionStorage.setItem('gameOver', true);
     }
   }
 
@@ -1189,10 +1188,10 @@ function betAmount(arg) {
         checkOut.classList.add('js_checkOut-win');
         checkOut.textContent = `WIN + ${total - currentDebt}`;
         deactivateBgmHowl(); winHowl.volume(0); 
-        if(localStorage.hasOwnProperty('millionaire')) return;
+        if(sessionStorage.hasOwnProperty('millionaire')) return;
         clearTimeout(tid_BigSpin); clearTimeout(tid_freeSpin); 
-        localStorage.setItem('millionaire', true);
-        localStorage.setItem('closure', true);
+        sessionStorage.setItem('millionaire', true);
+        sessionStorage.setItem('closure', true);
         // winPoint.classList.remove('js_winRed');
         setClosureText();
         if(panels[2].matched(panels[1], panels[0])) {  
@@ -1212,7 +1211,7 @@ function betAmount(arg) {
         setTimeout(() => {
           checkOutNoticeHowl.play();
           checkOut.classList.add('notification');
-          localStorage.setItem('closure', true);
+          sessionStorage.setItem('closure', true);
         }, 3000);
       }
     } else { 
@@ -1238,7 +1237,7 @@ function betAmount(arg) {
   }
 
   function setClosureText() {
-    if(localStorage.hasOwnProperty('closure')) {
+    if(sessionStorage.hasOwnProperty('closure')) {
       assignTextAndColor(winText, 'WON', '#ff0');
       assignTextAndColor(winPoint, 'BIG', '#00ff00e6');
       assignTextAndColor(betPoint, 'END', '#0af');
@@ -1496,7 +1495,8 @@ const mp4s = ['img/Seoul.mp4', 'img/City.mp4'];
         if(rectangles.length < 10) { confetti = false }
       });
     });
-  } console.clear(); //* log clear
+  } 
+  console.clear(); //* log clear
 
 
 //* Fetch Dancing Version -------------------------------------------------------
@@ -1517,9 +1517,9 @@ const fetchId = {
   failure: 'TLVAAgmN8GC5EeZbcZ',
 }
 //* Remove Cheer Id ---
-if(localStorage.hasOwnProperty('threeSeven')) {
+if(sessionStorage.hasOwnProperty('threeSeven')) {
   for (const index of Object.entries(fetchId)) {
-    localStorage.removeItem(index[0], index[1]);
+    sessionStorage.removeItem(index[0], index[1]);
   }
 }
 
@@ -1533,9 +1533,9 @@ const failureId = [
   'oZvIA0CvREeSBaBBmy','35HUBD2bFW0HgTu1Ax', 'UHAQncqfXmLXaK2DVo', 'RWy5XUTI8SJSh69k4D'
 ]; //*>
 
-if(!localStorage.hasOwnProperty('fetchFailureId')) {
-  failureId.forEach((id, index) => localStorage.setItem(index+1, id)); //*> init
-  localStorage.setItem('fetchFailureId', 'fetched');
+if(!sessionStorage.hasOwnProperty('fetchFailureId')) {
+  failureId.forEach((id, index) => sessionStorage.setItem(index+1, id)); //*> init
+  sessionStorage.setItem('fetchFailureId', 'fetched');
 }
 
 //* Save for incase of delay ---
@@ -1547,18 +1547,18 @@ if(!localStorage.hasOwnProperty('fetchFailureId')) {
 //     const response = await fetch(GIPHY_API);
 //     const data = await response.json(); 
 //     fetchImage.src = data.data.images.downsized_medium.url; 
-//     localStorage.setItem('fetchFailure', 'fetch completed');
-//     localStorage.setItem(index+1, id);
+//     sessionStorage.setItem('fetchFailure', 'fetch completed');
+//     sessionStorage.setItem(index+1, id);
 //     console.log(fetchImage.src);
 //   });
-// } if(!localStorage.getItem('failure')) { initFetch() } //* incase of delay
+// } if(!sessionStorage.getItem('failure')) { initFetch() } //* incase of delay
 
 //* Fetch failure ---
 let selectedId, randomId, randomNum;
 const fetchImage = document.querySelector('.frame');
   async function loadFailureData(duration) {
     embedFrame = true;
-    getSetLocalStorage_FailureId();
+    getSetsessionStorage_FailureId();
     const key = `${process_env}${uuid}`;
     const baseURL = `https://api.giphy.com/v1/content/${randomId}?`; //* byID 
     const GIPHY_API = `${baseURL}api_key=${key}`;
@@ -1577,36 +1577,38 @@ const fetchImage = document.querySelector('.frame');
     }, duration);
   }
 
-  function getSetLocalStorage_FailureId() {
+  function getSetsessionStorage_FailureId() {
     do {
-      randomNum = Math.floor(Math.random() * localStorage.length+1);
-      selectedId = localStorage.getItem(randomNum);
+      // randomNum = Math.floor(Math.random() * failureId.length+1); //* if not sessionStorage.removeItem
+      randomNum = Math.floor(Math.random() * sessionStorage.length+1); //*og if sessionStorage.removeItem
+      selectedId = sessionStorage.getItem(randomNum);
     } while(selectedId === null) {
       // console.log(selectedId); //* log
       randomId = selectedId;
-      localStorage.removeItem(randomNum, selectedId);
+      sessionStorage.removeItem(randomNum, selectedId); //*og if sessionStorage.removeItem
     }
-    //* if use initFetch() length === 4
-      if(localStorage.length === 3) { 
+    if(sessionStorage.hasOwnProperty('bestScore')) { 
+      //* if use initFetch() length === 5
+      if(sessionStorage.length === 4) { 
         failureId.forEach((id, index) => {
-          localStorage.setItem(index+1, id);
+          sessionStorage.setItem(index+1, id);
         });
       }
-    // if(localStorage.hasOwnProperty('bestScore')) {
-    //   //* if use initFetch() length === 5
-    //   if(localStorage.length === 4) { 
-    //     failureId.forEach((id, index) => {
-    //       localStorage.setItem(index+1, id);
-    //     });
-    //   }
-    // } else {
-    //   //* if use initFetch() length === 4
-    //   if(localStorage.length === 3) { 
-    //     failureId.forEach((id, index) => {
-    //       localStorage.setItem(index+1, id);
-    //     });
-    //   }
-    // }
+    } else {
+      //* if use initFetch() length === 4
+      if(sessionStorage.length === 3) { 
+        failureId.forEach((id, index) => {
+          sessionStorage.setItem(index+1, id);
+        });
+      }
+    }
+    //* if real deploy
+        //* if use initFetch() length === 4
+      // if(sessionStorage.length === 3) { 
+      //   failureId.forEach((id, index) => {
+      //     sessionStorage.setItem(index+1, id);
+      //   });
+      // }
   }
 
 //* Fetch matched ---
@@ -1660,8 +1662,8 @@ const loader = document.querySelector('.loader');
 const iid_load = setInterval(() => {
   if(total > 0) { insertPoint.classList.add('active')} //*
   if(total > 0 || currentDebt > 0) { checkOut.classList.add('active')} //*
-  if(localStorage.hasOwnProperty('gameOver')) { isGameOver() }
-  if(localStorage.hasOwnProperty('closure')) { isClosure() }
+  if(sessionStorage.hasOwnProperty('gameOver')) { isGameOver() }
+  if(sessionStorage.hasOwnProperty('closure')) { isClosure() }
   if(loadCount === 4) {
     loader.querySelectorAll('img').forEach(img => {
       img.classList.remove('active');
@@ -1681,11 +1683,11 @@ loader.addEventListener('touchstart', e => e.preventDefault()); //*
 
 
 // ---------------------------------------------------------------------------------------------
-//* GET localStorage KEY ------------
+//* GET sessionStorage KEY ------------
 // function forEachKey() {
-//   for (let i = 0; i < localStorage.length; i++) {
-//     console.log(parseFloat(localStorage.key(i)));
-//     console.log(localStorage.key(i));
+//   for (let i = 0; i < sessionStorage.length; i++) {
+//     console.log(parseFloat(sessionStorage.key(i)));
+//     console.log(sessionStorage.key(i));
 //   }
 // } forEachKey();
 // ---------------------------------------------------------------------------------------------
