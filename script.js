@@ -10,6 +10,9 @@ import {console_color,console_red,console_orange,console_yellow,console_green,
     ['e6','cc','b3','99','80','66','4d','33','1a']
 
 
+const unit = document.querySelector('.unit');
+  unit.addEventListener('touchstart', e => e.preventDefault());
+  
 let reelCount = 1;
   let total = 0;
     let currentDebt = 0;
@@ -25,6 +28,7 @@ let reelCount = 1;
     let pointsAdded = false;
   let stopAutomated = false;
 let insertMoney = false;
+let touch = false;
 
 class Panel {
   constructor() {
@@ -94,6 +98,12 @@ class Panel {
         }
       }
     });
+    this.stopBtn.addEventListener('touchstart', (e) => {
+      if(!touch) { touch = true; e.stopPropagation()}
+    });
+    this.stopBtn.addEventListener('touchend', () => {
+      setTimeout(() => { touch = false}, 200);
+    });
   } //* OUT OF Constructor 
 
   getRandomImg() {
@@ -149,9 +159,16 @@ class Panel {
 const panels = [ new Panel(), new Panel(), new Panel() ]; //* instance ***
 
 //* ---------------------------------------------------------------------------------------------------------
-
 //* reelHandler EventListener ----------------
+
 const reelHandler = document.querySelector('.reelHandler');
+  reelHandler.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  reelHandler.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
+  });
+
   function stopAutomate() {
     if(stopAutomated) return;
     autoStopHowl.play(); stopAutomated = true;
@@ -262,6 +279,12 @@ icons.forEach((icon, index) => {
     clearTimeout(tid_Volume);
     tid_Volume = setTimeout(() => volGage.style.opacity = 0, 3000);
   });
+  icon.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  icon.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
+  });
 });
 
 layers.forEach((layer, index) => {
@@ -282,6 +305,12 @@ layers.forEach((layer, index) => {
     volGage.style.setProperty('--vol', volArray[machineVolume] * 100 + '%');
     clearTimeout(tid_Volume);
     tid_Volume = setTimeout(() => volGage.style.opacity = 0, 3000);
+  });
+  layer.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  layer.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
   });
 });
 
@@ -1256,6 +1285,12 @@ function betAmount(arg) {
     }
   });
 
+  insertPoint.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  insertPoint.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
+  });
 
 //* bet2x & bet5x Event -------------------
 
@@ -1272,6 +1307,12 @@ const bet2x = document.querySelector('.btn-bet2x');
     bet2x.classList.toggle('js_bet2x-textColorBright');
   });
 
+  bet2x.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  bet2x.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
+  });
 
 const bet5x = document.querySelector('.btn-bet5x');
   bet5x.addEventListener('click', function () {
@@ -1285,6 +1326,13 @@ const bet5x = document.querySelector('.btn-bet5x');
       betXHowl.play();
       bet5x.classList.toggle('js_bet5x-activeEffect');; // bets5x btn flash effect 
     bet5x.classList.toggle('js_bet5x-textColorBright');
+  });
+
+  bet5x.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  bet5x.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
   });
 
 
@@ -1337,6 +1385,13 @@ const checkOut = document.querySelector('.check-out');
     }
   }); 
 
+  checkOut.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  checkOut.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
+  });
+
   function winPointSetDefault() {
     winPoint.textContent = 0; // reset winPoint
     winPoint.classList.remove('js_winRed'); // reset winRed
@@ -1374,6 +1429,13 @@ const spinBtn = document.getElementById('spin');
     });
   });
 
+  spinBtn.addEventListener('touchstart', (e) => {
+    if(!touch) { touch = true; e.stopPropagation()}
+  });
+  spinBtn.addEventListener('touchend', () => {
+    setTimeout(() => { touch = false}, 200);
+  });
+
 
 //* resize Event randomMp4 -------------------
 
@@ -1383,6 +1445,8 @@ const mp4s = ['img/Seoul.mp4', 'img/City.mp4'];
   window.addEventListener('resize', () => {
     video.src = mp4s[Math.floor(Math.random() * mp4s.length)];
   });
+
+  video.addEventListener('touchstart', e => e.preventDefault()); //*
 
 //* Confetti & Giphy Func -------------------
 
@@ -1522,21 +1586,27 @@ const fetchImage = document.querySelector('.frame');
       randomId = selectedId;
       localStorage.removeItem(randomNum, selectedId);
     }
-    if(localStorage.hasOwnProperty('bestScore')) {
-      //* if use initFetch() length === 5
-      if(localStorage.length === 4) { 
-        failureId.forEach((id, index) => {
-          localStorage.setItem(index+1, id);
-        });
-      }
-    } else {
-      //* if use initFetch() length === 4
+    //* if use initFetch() length === 4
       if(localStorage.length === 3) { 
         failureId.forEach((id, index) => {
           localStorage.setItem(index+1, id);
         });
       }
-    }
+    // if(localStorage.hasOwnProperty('bestScore')) {
+    //   //* if use initFetch() length === 5
+    //   if(localStorage.length === 4) { 
+    //     failureId.forEach((id, index) => {
+    //       localStorage.setItem(index+1, id);
+    //     });
+    //   }
+    // } else {
+    //   //* if use initFetch() length === 4
+    //   if(localStorage.length === 3) { 
+    //     failureId.forEach((id, index) => {
+    //       localStorage.setItem(index+1, id);
+    //     });
+    //   }
+    // }
   }
 
 //* Fetch matched ---
@@ -1605,6 +1675,10 @@ const iid_load = setInterval(() => {
     clearInterval(iid_load);
   }
 }, 10);
+
+loader.addEventListener('touchstart', e => e.preventDefault()); //*
+
+
 
 // ---------------------------------------------------------------------------------------------
 //* GET localStorage KEY ------------
