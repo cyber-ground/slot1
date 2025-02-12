@@ -9,7 +9,6 @@ import {console_color,console_red,console_orange,console_yellow,console_green,
 //	['.9','.8','.7','.6','.5','.4','.3','.2','.1']
     ['e6','cc','b3','99','80','66','4d','33','1a']
 
-sessionStorage.clear();
 const unit = document.querySelector('.unit');
   unit.addEventListener('touchstart', e => e.preventDefault());
 
@@ -107,9 +106,8 @@ class Panel {
   } //* OUT OF Constructor 
 
   getRandomImg() {
-    // const images = ['img/bell.jpg','img/cherry.jpg','img/watermelon.jpg','img/diamond.jpg',
-    //   'img/bar.jpg','img/seven.jpg','img/dollar.jpg','img/pumpkin.jpg','img/blueSeven.jpg'];
-    const images = ['img/diamond.jpg','img/diamond.jpg','img/watermelon.jpg','img/diamond.jpg'];
+    const images = ['img/bell.jpg','img/cherry.jpg','img/watermelon.jpg','img/diamond.jpg',
+      'img/bar.jpg','img/seven.jpg','img/dollar.jpg','img/pumpkin.jpg','img/blueSeven.jpg'];
     return images[Math.floor(Math.random() * images.length)];
   }
   
