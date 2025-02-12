@@ -9,6 +9,7 @@ import {console_color,console_red,console_orange,console_yellow,console_green,
 //	['.9','.8','.7','.6','.5','.4','.3','.2','.1']
     ['e6','cc','b3','99','80','66','4d','33','1a']
 
+
 const unit = document.querySelector('.unit');
   unit.addEventListener('touchstart', e => e.preventDefault());
 
@@ -1533,9 +1534,9 @@ const failureId = [
   'oZvIA0CvREeSBaBBmy','35HUBD2bFW0HgTu1Ax', 'UHAQncqfXmLXaK2DVo', 'RWy5XUTI8SJSh69k4D'
 ]; //*>
 
-if(!localStorage.hasOwnProperty('fetchFailureId')) {
-  failureId.forEach((id, index) => localStorage.setItem(index+1, id)); //*> init
-  localStorage.setItem('fetchFailureId', 'fetched');
+if(!sessionStorage.hasOwnProperty('fetchFailureId')) {
+  failureId.forEach((id, index) => sessionStorage.setItem(index+1, id)); //*> init
+  sessionStorage.setItem('fetchFailureId', 'fetched');
 }
 
 //* Save for incase of delay ---
@@ -1580,35 +1581,35 @@ const fetchImage = document.querySelector('.frame');
   function getSetLocalStorage_FailureId() {
     do {
       // randomNum = Math.floor(Math.random() * failureId.length+1); //* if not localStorage.removeItem
-      randomNum = Math.floor(Math.random() * localStorage.length+1); //*og if localStorage.removeItem
-      selectedId = localStorage.getItem(randomNum);
+      randomNum = Math.floor(Math.random() * sessionStorage.length+1); //*og if sessionStorage.removeItem
+      selectedId = sessionStorage.getItem(randomNum);
     } while(selectedId === null) {
       // console.log(selectedId); //* log
       randomId = selectedId;
-      localStorage.removeItem(randomNum, selectedId); //*og if localStorage.removeItem
+      sessionStorage.removeItem(randomNum, selectedId); //*og if localStorage.removeItem
     }
-    if(localStorage.hasOwnProperty('bestScore')) { 
-      //* if use initFetch() length === 5
-      if(localStorage.length === 4) { 
-        failureId.forEach((id, index) => {
-          localStorage.setItem(index+1, id);
-        });
-      }
-    } else {
-      //* if use initFetch() length === 4
-      if(localStorage.length === 3) { 
-        failureId.forEach((id, index) => {
-          localStorage.setItem(index+1, id);
-        });
-      }
-    }
+    // if(localStorage.hasOwnProperty('bestScore')) { 
+    //   //* if use initFetch() length === 5
+    //   if(localStorage.length === 4) { 
+    //     failureId.forEach((id, index) => {
+    //       localStorage.setItem(index+1, id);
+    //     });
+    //   }
+    // } else {
+    //   //* if use initFetch() length === 4
+    //   if(localStorage.length === 3) { 
+    //     failureId.forEach((id, index) => {
+    //       localStorage.setItem(index+1, id);
+    //     });
+    //   }
+    // }
     //* if real deploy
         //* if use initFetch() length === 4
-      // if(localStorage.length === 3) { 
-      //   failureId.forEach((id, index) => {
-      //     localStorage.setItem(index+1, id);
-      //   });
-      // }
+      if(sessionStorage.length === 1) { 
+        failureId.forEach((id, index) => {
+          sessionStorage.setItem(index+1, id);
+        });
+      }
   }
 
 //* Fetch matched ---
