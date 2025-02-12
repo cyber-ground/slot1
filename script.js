@@ -9,7 +9,7 @@ import {console_color,console_red,console_orange,console_yellow,console_green,
 //	['.9','.8','.7','.6','.5','.4','.3','.2','.1']
     ['e6','cc','b3','99','80','66','4d','33','1a']
 
-
+sessionStorage.clear();
 const unit = document.querySelector('.unit');
   unit.addEventListener('touchstart', e => e.preventDefault());
 
@@ -107,8 +107,9 @@ class Panel {
   } //* OUT OF Constructor 
 
   getRandomImg() {
-    const images = ['img/bell.jpg','img/cherry.jpg','img/watermelon.jpg','img/diamond.jpg',
-      'img/bar.jpg','img/seven.jpg','img/dollar.jpg','img/pumpkin.jpg','img/blueSeven.jpg'];
+    // const images = ['img/bell.jpg','img/cherry.jpg','img/watermelon.jpg','img/diamond.jpg',
+    //   'img/bar.jpg','img/seven.jpg','img/dollar.jpg','img/pumpkin.jpg','img/blueSeven.jpg'];
+    const images = ['img/diamond.jpg','img/diamond.jpg','img/watermelon.jpg','img/diamond.jpg'];
     return images[Math.floor(Math.random() * images.length)];
   }
   
@@ -1518,9 +1519,9 @@ const fetchId = {
   failure: 'TLVAAgmN8GC5EeZbcZ',
 }
 //* Remove Cheer Id ---
-if(localStorage.hasOwnProperty('threeSeven')) {
+if(sessionStorage.hasOwnProperty('threeSeven')) {
   for (const index of Object.entries(fetchId)) {
-    localStorage.removeItem(index[0], index[1]);
+    sessionStorage.removeItem(index[0], index[1]);
   }
 }
 
@@ -1580,36 +1581,19 @@ const fetchImage = document.querySelector('.frame');
 
   function getSetLocalStorage_FailureId() {
     do {
-      // randomNum = Math.floor(Math.random() * failureId.length+1); //* if not localStorage.removeItem
-      randomNum = Math.floor(Math.random() * sessionStorage.length+1); //*og if sessionStorage.removeItem
+      randomNum = Math.floor(Math.random() * failureId.length+1); 
       selectedId = sessionStorage.getItem(randomNum);
     } while(selectedId === null) {
       // console.log(selectedId); //* log
       randomId = selectedId;
-      sessionStorage.removeItem(randomNum, selectedId); //*og if localStorage.removeItem
+      sessionStorage.removeItem(randomNum, selectedId); 
     }
-    // if(localStorage.hasOwnProperty('bestScore')) { 
-    //   //* if use initFetch() length === 5
-    //   if(localStorage.length === 4) { 
-    //     failureId.forEach((id, index) => {
-    //       localStorage.setItem(index+1, id);
-    //     });
-    //   }
-    // } else {
-    //   //* if use initFetch() length === 4
-    //   if(localStorage.length === 3) { 
-    //     failureId.forEach((id, index) => {
-    //       localStorage.setItem(index+1, id);
-    //     });
-    //   }
-    // }
-    //* if real deploy
-        //* if use initFetch() length === 4
-      if(sessionStorage.length === 1) { 
-        failureId.forEach((id, index) => {
-          sessionStorage.setItem(index+1, id);
-        });
-      }
+    //* if use initFetch() length === 2
+    if(sessionStorage.length === 1) { 
+      failureId.forEach((id, index) => {
+        sessionStorage.setItem(index+1, id);
+      });
+    }
   }
 
 //* Fetch matched ---
